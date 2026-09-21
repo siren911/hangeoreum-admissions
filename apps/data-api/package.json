@@ -1,0 +1,11 @@
+{
+  "name": "@j/data-api", "version": "0.1.0", "private": true, "type": "module",
+  "scripts": {
+    "dev": "node ../../scripts/wrangler.mjs dev --port 8787 --ip 127.0.0.1",
+    "db:local": "node ../../scripts/wrangler.mjs d1 migrations apply DB --local",
+    "check": "node ../../scripts/wrangler.mjs deploy --dry-run --outdir dist",
+    "deploy:preview": "node ../../scripts/wrangler.mjs deploy --env preview",
+    "deploy:production": "node ../../scripts/wrangler.mjs deploy --env production"
+  },
+  "dependencies": {"@j/core": "*"}
+}

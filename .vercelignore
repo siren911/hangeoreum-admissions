@@ -1,0 +1,26 @@
+# Only application source and build configuration belong in the deployment.
+.local
+.git
+.agents
+.codex
+research
+data
+docs
+tests
+node_modules
+**/node_modules
+**/.next
+**/.wrangler
+**/dist
+**/.env*
+**/.dev.vars*
+**/*.tsbuildinfo
+**/*.log
+**/AGENTS.md
+**/CLAUDE.md
+*.md
+*.png
+*.pdf
+coverage/
+test-results/
+playwright-report/

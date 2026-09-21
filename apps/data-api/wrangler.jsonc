@@ -1,0 +1,19 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "hangeoreum-data-local",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-15",
+  "workers_dev": true,
+  "vars": { "APP_ENV": "local" },
+  "d1_databases": [{ "binding": "DB", "database_name": "hangeoreum-local", "database_id": "00000000-0000-0000-0000-000000000001", "migrations_dir": "migrations" }],
+  "env": {
+    "preview": {
+      "name": "hangeoreum-data-preview", "vars": { "APP_ENV": "preview" },
+      "d1_databases": [{ "binding": "DB", "database_name": "hangeoreum-preview", "database_id": "REPLACE_WITH_PREVIEW_D1_ID", "migrations_dir": "migrations" }]
+    },
+    "production": {
+      "name": "hangeoreum-data", "vars": { "APP_ENV": "production" },
+      "d1_databases": [{ "binding": "DB", "database_name": "hangeoreum-production", "database_id": "REPLACE_WITH_PRODUCTION_D1_ID", "migrations_dir": "migrations" }]
+    }
+  }
+}
