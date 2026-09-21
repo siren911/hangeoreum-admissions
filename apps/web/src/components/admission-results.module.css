@@ -51,6 +51,8 @@
 .derivedScore small { color: #799486; font-size: 9px; margin-left: 3px; }
 .derivedScore p { font-size: 9px; line-height: 1.7; color: #758b7f; margin-top: 4px; }
 .noAverage { display: block; font-size: 15px; font-weight: 500; color: #8a8791; margin: 4px 0; }
+.basisDifference { font-size: 11px; line-height: 1.7; color: #84683f; margin-top: 10px; }
+.scoreComparison .statistic { margin-bottom: 8px; }
 .subjectTable { width: 100%; max-width: 560px; table-layout: fixed; border-collapse: collapse; margin: 12px 0; font-size: 12px; font-variant-numeric: tabular-nums; }
 .subjectTable th, .subjectTable td { padding: 8px 10px; border-bottom: 1px solid #e9e3ef; text-align: right; }
 .subjectTable th:first-child { text-align: left; }

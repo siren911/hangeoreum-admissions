@@ -40,10 +40,10 @@ describe('2026 historical admissions data', () => {
     expect(row('wku-dent-natural').metrics[0].value).toBe(562.4);
   });
 
-  it('keeps unverified results and missing counts distinct from non-disclosure and zero', () => {
-    expect(row('pnu-km')).toMatchObject({ status: 'unverified', seats: null, gun: null, metrics: [] });
-    expect(row('smu-km').seats).toBeNull();
-    expect(row('deu-km-calculus').gun).toBeNull();
+  it('uses newly verified 2026 counts without copying the 2027 plan', () => {
+    expect(row('pnu-km')).toMatchObject({ status: 'published', seats: 5, gun: '가', metrics: [{ value: 743.5 }] });
+    expect(row('smu-km').seats).toBe(18);
+    expect(row('deu-km-calculus').gun).toBe('나');
     expect(row('deu-km-calculus').seats).toBe(11);
   });
 
@@ -102,11 +102,11 @@ describe('2026 historical admissions data', () => {
   it('labels a 70%-position profile as its own statistic, not a cohort mean', () => {
     expect(admissionPercentileSummary(row('hanyang-med'))).toEqual({ average: 98, inquiryAverage: 95, basis: 'registered-70' });
     expect(admissionPercentileSummary(row('ajou-med'))?.average).toBe(98.83);
-    expect(admissionResults2026.filter(r => admissionPercentileSummary(r))).toHaveLength(9);
+    expect(admissionResults2026.filter(r => admissionPercentileSummary(r))).toHaveLength(25);
   });
 
   it('does not infer percentiles from a converted score or a published weighted percentile alone', () => {
-    for (const id of ['gcu-km', 'khu-km-human', 'wku-km-natural', 'wku-dent-human', 'pnu-km']) {
+    for (const id of ['gcu-km', 'gachon-med', 'dju-km', 'sju-km-a', 'wku-dent-human']) {
       expect(admissionPercentileSummary(row(id))).toBeNull();
     }
     const wsu = structuredClone(row('wsu-km'));
@@ -137,5 +137,44 @@ describe('2026 historical admissions data', () => {
     const wsu = structuredClone(row('wsu-km'));
     Object.assign(wsu.profile!, { korean: 95, math: 97.03, inquiry1: 97, inquiry2: 97.01 });
     expect(admissionPercentileSummary(wsu)?.average).toBe(96.35);
+  });
+
+  it('calculates all newly verified profiles using two inquiry subjects', () => {
+    const expected = { 'dsu-km': 93, 'deu-km-calculus': 95.17, 'deu-km-probability': 96.33,
+      'pnu-km': 96.5, 'khu-km-human': 98.33, 'khu-km-natural': 96.5, 'khu-med': 98.33,
+      'khu-dent': 98, 'sju-km-b': 96.67, 'smu-km': 96, 'catholic-med': 99.17,
+      'wku-km-natural': 96.33, 'wku-dent-natural': 96.83, 'wku-med': 97.67 };
+    for (const [id, average] of Object.entries(expected)) {
+      expect(admissionPercentileSummary(row(id))?.average).toBe(average);
+      expect(row(id).profile?.source?.url).toContain('searchSyr=2027');
+      expect(row(id).profile?.grades).toBeUndefined();
+    }
+    expect(row('smu-km').profile?.history).toBeNull();
+  });
+
+  it('uses only the explicitly defined three-area sum for Dongguk means', () => {
+    expect(admissionPercentileSummary(row('dgu-km-1'))).toEqual({ average: 96.7, inquiryAverage: null, basis: 'registered-mean' });
+    expect(admissionPercentileSummary(row('dgu-km-2'))).toEqual({ average: 97.39, inquiryAverage: null, basis: 'registered-mean' });
+    expect(row('dgu-km-2').statistic).toBe('registered-80');
+    expect(row('dgu-km-2').profile).toBeUndefined();
+    for (const invalid of [NaN, Infinity, -1, 301]) {
+      const sample = structuredClone(row('dgu-km-2'));
+      sample.percentileSum!.value = invalid;
+      expect(admissionPercentileSummary(sample)).toBeNull();
+    }
+  });
+
+  it('keeps each unresolved track visible with its actual reason', () => {
+    expect(admissionResults2026.filter(r => r.status === 'published')).toHaveLength(29);
+    expect(admissionResults2026.filter(r => r.percentilePending)).toHaveLength(4);
+    for (const id of ['gcu-km', 'gachon-med', 'dju-km', 'sju-km-a']) {
+      expect(row(id).percentilePending?.reason.length).toBeGreaterThan(30);
+      expect(row(id).profile).toBeUndefined();
+      expect(admissionPercentileSummary(row(id))).toBeNull();
+    }
+    expect(row('sju-km-a').percentilePending?.label).toBe('원문 수치 확인 필요');
+    expect(row('dju-km').metrics[0].value).toBe(985.3);
+    expect(row('wku-km-human').status).toBe('withheld');
+    expect(row('wku-dent-human').status).toBe('withheld');
   });
 });

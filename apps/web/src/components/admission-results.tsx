@@ -18,6 +18,7 @@ export default function AdmissionResults() {
   const published = admissionResults2026.filter(row => row.status === 'published').length;
   const withheld = admissionResults2026.filter(row => row.status === 'withheld').length;
   const unverified = total - published - withheld;
+  const percentileCount = admissionResults2026.filter(row => admissionPercentileSummary(row)).length;
   function chooseCategory(value: AdmissionCategory | 'all') { setCategory(value); setQuery(''); setStatistic('all'); }
 
   return <section className={styles.dashboard} aria-label="2026학년도 정시 입결 대시보드">
@@ -36,7 +37,7 @@ export default function AdmissionResults() {
           <div><b>{unverified}</b><span>추가 확인 필요</span></div>
         </div>
         <div className={styles.coverageBar} aria-hidden="true"><i style={{ flex: published }}/><i style={{ flex: withheld }}/><i style={{ flex: unverified }}/></div>
-        <p>대학 입학처·대교협 어디가 자료<br/>정리 기준 {RESULTS_AS_OF.replaceAll('-', '.')}</p>
+        <p><b>국수탐 평균 백분위 {percentileCount}/{total}개 전형 표시</b><br/>대학 입학처·대교협 어디가 자료 · {RESULTS_AS_OF.replaceAll('-', '.')}</p>
       </div>
     </div>
 
@@ -51,7 +52,7 @@ export default function AdmissionResults() {
     <p className={styles.scope}>현재 워크스페이스의 검토 대학과 확인된 인문·자연 전형을 수록했습니다. 전국 모든 대학·전형의 전수 목록은 아닙니다. 지역인재·수시 입결은 포함하지 않습니다.</p>
 
     <div className={styles.readingGuide}>
-      <CircleHelp size={19}/><div><b>대학 공개 점수와 계산한 평균 백분위를 함께 보세요.</b><p>국수탐 평균 백분위 = (국어 + 수학 + 탐구 두 과목 평균) ÷ 3. 공개된 과목별 백분위로 계산하며, 영어·한국사·가산점은 포함하지 않습니다. 대학 환산점수를 백분위로 역산한 값이나 대학의 공식 합격컷이 아닙니다.</p><p>70%컷은 마지막 합격자의 점수가 아닙니다. 등록자 평균과 70% 위치의 성적은 서로 다른 통계이며, 대학마다 환산 방식도 다릅니다.</p></div>
+      <CircleHelp size={19}/><div><b>대학 공개 점수와 계산한 평균 백분위를 함께 보세요.</b><p>국수탐 평균 백분위 = (국어 + 수학 + 탐구 두 과목 평균) ÷ 3. 과목별 성적 또는 대학이 공개한 3영역 백분위 합으로 계산하며, 영어·한국사·가산점은 포함하지 않습니다. 대학 환산점수를 백분위로 역산한 값이나 대학의 공식 합격컷이 아닙니다.</p><p>70%컷은 마지막 합격자의 점수가 아닙니다. 등록자 평균과 70% 위치의 성적은 서로 다른 통계이며, 대학마다 환산 방식도 다릅니다. 계산 보류·비공개 전형은 아래의 확인 사유를 보세요.</p></div>
     </div>
     <div className={styles.toolbar}>
       <div className={styles.sectionTitle}><h2>{category === 'all' ? '전체 계열' : admissionCategoryLabels[category]} 입결 <span>{rows.length}</span></h2><button aria-pressed={category === 'all'} onClick={() => chooseCategory('all')}>전체 계열 보기</button></div>
@@ -90,16 +91,17 @@ function ResultCard({row}: {row: AdmissionResult2026}) {
         {row.competition !== null && <p>경쟁률 {number(row.competition)} : 1</p>}
       </div>
       <div className={styles.scoreBlock}>
-        <span className={`${styles.statistic} ${row.statistic === 'registered-mean' || row.statistic === 'admitted-70' ? styles.differentStatistic : ''} ${!published ? styles.pending : ''}`}>{published ? resultStatisticLabels[row.statistic] : row.status === 'withheld' ? '성적 비공개' : '입결 추가 확인 필요'}</span>
+        {!published && <span className={`${styles.statistic} ${styles.pending}`}>{row.status === 'withheld' ? '성적 비공개' : '입결 추가 확인 필요'}</span>}
         {published ? <div className={styles.scoreComparison}>
-          <div><span className={styles.scoreOrigin}>대학 공개 점수</span><div className={styles.metrics}>{row.metrics.map((metric,index) => <div key={index}><span>{metric.label}</span><div><b>{number(metric.value)}</b><small>{metric.unit}</small></div></div>)}</div></div>
-          <div className={styles.derivedScore}><span className={styles.scoreOrigin}>과목 성적으로 계산</span><span className={styles.derivedLabel}>국수탐 평균 백분위</span>{summary ? <><div><b>{summary.average.toFixed(2)}</b><small>/100</small></div><p>{summary.basis === 'registered-mean' ? '등록자 평균 성적 기준' : '공개 70% 위치 성적 기준'}</p></> : <><strong className={styles.noAverage}>계산 보류</strong><p>과목별 백분위 미확인</p></>}</div>
+          <div><span className={`${styles.statistic} ${row.statistic === 'registered-mean' || row.statistic === 'admitted-70' ? styles.differentStatistic : ''}`}>{resultStatisticLabels[row.statistic]}</span><span className={styles.scoreOrigin}>대학 공개 점수</span><div className={styles.metrics}>{row.metrics.map((metric,index) => <div key={index}><span>{metric.label}</span><div><b>{number(metric.value)}</b><small>{metric.unit}</small></div></div>)}</div></div>
+          <div className={styles.derivedScore}><span className={styles.scoreOrigin}>{row.percentileSum ? '공개 백분위 합으로 계산' : '과목 성적으로 계산'}</span><span className={styles.derivedLabel}>국수탐 평균 백분위</span>{summary ? <><div><b>{summary.average.toFixed(2)}</b><small>/100</small></div><p>{summary.basis === 'registered-mean' ? '등록자 평균 성적 기준' : '공개 70% 위치 성적 기준'}</p></> : <><strong className={styles.noAverage}>계산 보류</strong><p>{row.percentilePending?.label ?? '과목별 백분위 미확인'}</p></>}</div>
         </div> : <p className={styles.unavailable}>{row.status === 'withheld' ? '소수 모집으로 대학이 점수를 공개하지 않았습니다.' : '검증된 2026 점수를 아직 확보하지 못했습니다.'}</p>}
+        {summary && summary.basis !== row.statistic && <p className={styles.basisDifference}>공개 점수와 평균 백분위의 통계 기준이 다릅니다. 각 숫자의 기준을 확인하세요.</p>}
       </div>
     </div>
     <div className={styles.cardFooter}>
       <details className={styles.detail} open={meanProfile || undefined}>
-        <summary>과목별 백분위·등급·계산식 <ChevronDown size={15}/></summary>
+        <summary>{summary ? '공개 성적·등급·계산식' : '공개 자료·확인 사항'} <ChevronDown size={15}/></summary>
         <div className={styles.detailBody}>
           {row.note && <p>{row.note}</p>}
           {profile && <div className={styles.profile}>
@@ -116,6 +118,13 @@ function ResultCard({row}: {row: AdmissionResult2026}) {
             <p>{profile.note}</p>
             {profile.source && <a className={styles.profileSource} href={profile.source.url} target="_blank" rel="noreferrer">{profile.source.label} · {profile.source.page} <ArrowUpRight size={13}/></a>}
           </div>}
+          {row.percentileSum && summary && <div className={styles.profile}>
+            <b>대학이 공개한 최종등록자 평균</b>
+            <p>국어 + 수학 + 탐구 2과목 평균의 백분위 합: <strong>{number(row.percentileSum.value)}</strong> / 300 · 영어 평균 <strong>{row.percentileSum.english.toFixed(2)}등급</strong></p>
+            <div className={styles.averageFormula}><b>국수탐 평균 백분위 계산</b><p>{number(row.percentileSum.value)} ÷ 3 = <strong>{summary.average.toFixed(2)}</strong></p><small>공식 주석에 명시된 3영역 합을 사용합니다. 과목별 성적은 역산하지 않습니다. 왼쪽 환산점수 80%컷과 다른 통계입니다.</small></div>
+            <a className={styles.profileSource} href={row.percentileSum.source.url} target="_blank" rel="noreferrer">백분위 합·영어 평균 공식표 · {row.percentileSum.source.page} <ArrowUpRight size={13}/></a>
+          </div>}
+          {row.percentilePending && <div className={styles.profile}><b>{row.percentilePending.label}</b><p>{row.percentilePending.reason}</p><a className={styles.profileSource} href={row.percentilePending.source.url} target="_blank" rel="noreferrer">추가 확인한 공식 자료 <ArrowUpRight size={13}/></a></div>}
           <dl><div><dt>모집인원 기준</dt><dd>{row.seatsNote}</dd></div><div><dt>공식 자료 위치</dt><dd>{row.source.page}</dd></div><div><dt>대조·정리일</dt><dd>{row.checkedAt}</dd></div></dl>
         </div>
       </details>

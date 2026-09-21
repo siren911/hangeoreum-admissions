@@ -28,6 +28,8 @@ export type AdmissionResult2026 = {
   checkedAt: string;
   priority?: boolean;
   profile?: HistoricalScoreProfile;
+  percentileSum?: { value: number; statistic: 'registered-mean'; english: number; source: { url: string; page: string; label: string } };
+  percentilePending?: { label: string; reason: string; source: { url: string; page: string; label: string } };
 } & (
   | { status: 'published'; statistic: ResultStatistic; metrics: [HistoricalMetric, ...HistoricalMetric[]] }
   | { status: 'withheld' | 'unverified'; statistic: null; metrics: [] }
@@ -46,8 +48,14 @@ export const resultStatisticLabels: Record<ResultStatistic, string> = {
 
 // Use the published subject percentiles, never invert a university's converted score.
 export function admissionPercentileSummary(row: AdmissionResult2026) {
+  if (row.status !== 'published') return null;
+  if (row.percentileSum) {
+    const sum = row.percentileSum;
+    if (!Number.isFinite(sum.value) || sum.value < 0 || sum.value > 300) return null;
+    return { average: new Decimal(sum.value).div(3).toDecimalPlaces(2, Decimal.ROUND_HALF_UP).toNumber(), inquiryAverage: null, basis: sum.statistic };
+  }
   const p = row.profile;
-  if (row.status !== 'published' || !p ||
+  if (!p ||
     ![p.korean, p.math, p.inquiry1, p.inquiry2].every(value =>
       typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 100)) return null;
   const inquiry = new Decimal(p.inquiry1).plus(p.inquiry2).div(2);

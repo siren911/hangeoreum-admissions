@@ -29,7 +29,16 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "영어 환산점수와 대학 반영비율을 포함한 지표입니다. 국수탐 백분위 단순평균이나 원점수가 아닙니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "percentilePending": {
+      "label": "과목별 자료 없음",
+      "reason": "입학처 엑셀은 영어 환산·반영비율이 포함된 지표만 공개합니다. 어디가 과목별 표도 추가 안내자료를 참조하도록 되어 있어 국수탐 단순평균을 계산할 수 없습니다.",
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000063",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      }
+    }
   },
   {
     "id": "dju-km",
@@ -57,7 +66,16 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "모집 7명, 등록 6명. 70%컷과 다른 80%컷입니다. 표의 2027 모집인원 열과 구분했습니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "percentilePending": {
+      "label": "원문 수치 확인 필요",
+      "reason": "어디가 70% 백분위 칸의 국어·수학·탐구1이 모두 1로 기재되어, 입학처 환산점수 985.3점과 비교할 자료로 채택하지 않았습니다. 탐구2도 확인되지 않아 평균 계산을 보류합니다.",
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000095",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      }
+    }
   },
   {
     "id": "dsu-km",
@@ -85,7 +103,22 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "2026 수능 환산 70%컷입니다. 2027 산식으로 계산한 총점과 직접 같다고 가정하지 않습니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 97,
+      "math": 97,
+      "inquiry1": 95,
+      "inquiry2": 75,
+      "english": 1,
+      "history": 1,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000104",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구는 높은 한 과목을 반영하는 전형입니다. 여기의 3영역 평균은 두 탐구를 모두 평균 내므로 대학의 합격 판정 방식과 다릅니다. 어디가 원문은 사탐·과탐 칸에 동일한 값을 중복 기재하여 실제 선택계열은 특정하지 않았습니다. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "khu-km-human",
@@ -118,7 +151,22 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "백분위는 계열별 반영비율을 적용한 지표입니다. 같은 표에 있는 상위 80% 평균과 구별합니다. 인문·자연의 반영비율이 다릅니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 99,
+      "math": 97,
+      "inquiry1": 99,
+      "inquiry2": 99,
+      "english": 2,
+      "history": 2,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000066",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 사탐입니다. 좌측 반영비율 적용 백분위와 우측 3영역 단순평균은 산출 방식이 다릅니다. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "khu-km-natural",
@@ -151,7 +199,22 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "백분위는 계열별 반영비율을 적용한 지표입니다. 같은 표에 있는 상위 80% 평균과 구별합니다. 인문·자연의 반영비율이 다릅니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 91,
+      "math": 100,
+      "inquiry1": 99,
+      "inquiry2": 98,
+      "english": 2,
+      "history": 4,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000066",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 과탐입니다. 좌측 반영비율 적용 백분위와 우측 3영역 단순평균은 산출 방식이 다릅니다. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "deu-km-calculus",
@@ -160,9 +223,9 @@ export const admissionResults2026: AdmissionResult2026[] = [
     "university": "동의대학교",
     "program": "한의예과(미적분/기하)",
     "selection": "수능 일반학생전형",
-    "gun": null,
+    "gun": "나",
     "seats": 11,
-    "seatsNote": "2026 최종 모집인원. 모집군은 이 자료에서 확인하지 못했습니다.",
+    "seatsNote": "2026 입학처 결과 및 어디가 일반학생전형 최종 모집인원.",
     "competition": 6.18,
     "statistic": "registered-mean",
     "status": "published",
@@ -178,8 +241,23 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "page": "PDF 6쪽 · 책자 4쪽",
       "label": "공식 2026 입시결과"
     },
-    "note": "평균만 확인했습니다. 70%컷 또는 최저 합격점으로 해석할 수 없습니다. 이 결과표에는 모집군이 표시되어 있지 않습니다.",
-    "checkedAt": "2026-09-21"
+    "note": "대학 입학처의 환산점수는 최종등록자 평균입니다. 과목별 백분위는 어디가의 최종등록자 70% 위치 자료를 별도 표시하므로 통계 기준을 구분하세요.",
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 99,
+      "math": 88,
+      "inquiry1": 98,
+      "inquiry2": 99,
+      "english": 1,
+      "history": 2,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000107",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 사탐입니다. 좌측 환산점수는 등록자 평균이고, 이 과목 성적은 어디가에 별도로 공개된 70% 위치 성적입니다. 두 값은 동일 통계가 아닙니다. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "deu-km-probability",
@@ -188,9 +266,9 @@ export const admissionResults2026: AdmissionResult2026[] = [
     "university": "동의대학교",
     "program": "한의예과(확률과통계)",
     "selection": "수능 일반학생전형",
-    "gun": null,
+    "gun": "나",
     "seats": 3,
-    "seatsNote": "2026 최종 모집인원. 모집군은 이 자료에서 확인하지 못했습니다.",
+    "seatsNote": "2026 입학처 결과 및 어디가 일반학생전형 최종 모집인원.",
     "competition": 12,
     "statistic": "registered-mean",
     "status": "published",
@@ -206,8 +284,23 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "page": "PDF 6쪽 · 책자 4쪽",
       "label": "공식 2026 입시결과"
     },
-    "note": "평균만 확인했습니다. 70%컷 또는 최저 합격점으로 해석할 수 없습니다. 이 결과표에는 모집군이 표시되어 있지 않습니다.",
-    "checkedAt": "2026-09-21"
+    "note": "대학 입학처의 환산점수는 최종등록자 평균입니다. 과목별 백분위는 어디가의 최종등록자 70% 위치 자료를 별도 표시하므로 통계 기준을 구분하세요.",
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 99,
+      "math": 92,
+      "inquiry1": 99,
+      "inquiry2": 97,
+      "english": 1,
+      "history": 1,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000107",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 사탐입니다. 좌측 환산점수는 등록자 평균이고, 이 과목 성적은 어디가에 별도로 공개된 70% 위치 성적입니다. 두 값은 동일 통계가 아닙니다. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "wsu-km",
@@ -311,7 +404,22 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "자연 모집단위의 2026 결과입니다. 인문 전형의 결과가 아닙니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 100,
+      "math": 94,
+      "inquiry1": 93,
+      "inquiry2": 97,
+      "english": 2,
+      "history": 1,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000159",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 과탐입니다. 공식 표의 평균과 여기의 탐구를 한 영역으로 묶은 3영역 평균은 산식이 다를 수 있으므로 각각 구분해 보세요. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "smu-km",
@@ -321,8 +429,8 @@ export const admissionResults2026: AdmissionResult2026[] = [
     "program": "한의예과",
     "selection": "수능 일반전형",
     "gun": "나",
-    "seats": null,
-    "seatsNote": "2026 결과표에 모집인원 미기재. 2027 인원으로 대신하지 않습니다.",
+    "seats": 18,
+    "seatsNote": "2026 어디가 일반전형 최종 모집인원: 최초 17명 + 이월 1명.",
     "competition": 6.61,
     "statistic": "admitted-70",
     "status": "published",
@@ -339,7 +447,22 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 요강 속 2026 결과"
     },
     "note": "최초~충원 전체 합격자 기준입니다. 원문의 정의는 “전체 합격자 중 하위 70% 성적”이며, 최종등록자 70%컷과 다른 모집단입니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 95,
+      "math": 97,
+      "inquiry1": 97,
+      "inquiry2": 95,
+      "english": 1,
+      "history": null,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000137",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 과탐입니다. 요강의 환산점수는 전체 합격자 70%, 어디가 과목별 자료는 최종등록자 70%로 정의가 다릅니다. 두 자료를 같은 통계로 보지 마세요. 한국사는 0으로 기재되어 실제 등급을 확인할 수 없습니다. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "dgu-km-2",
@@ -367,7 +490,17 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 요강 속 2026 결과"
     },
     "note": "국수탐 백분위 합 열은 등록자 평균, 환산점수 열은 80%컷으로 서로 다른 통계입니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "percentileSum": {
+      "value": 292.17,
+      "statistic": "registered-mean",
+      "english": 1.0,
+      "source": {
+        "url": "https://ipsi.dongguk.ac.kr/cmmn/fileDown.do?fileSeq=2562",
+        "page": "2027 정시요강 PDF 6쪽 · 2026 결과",
+        "label": "공식 요강 속 2026 결과"
+      }
+    }
   },
   {
     "id": "dgu-km-1",
@@ -395,7 +528,17 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 요강 속 2026 결과"
     },
     "note": "국수탐 백분위 합 열은 등록자 평균, 환산점수 열은 80%컷으로 서로 다른 통계입니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "percentileSum": {
+      "value": 290.09,
+      "statistic": "registered-mean",
+      "english": 1.18,
+      "source": {
+        "url": "https://ipsi.dongguk.ac.kr/cmmn/fileDown.do?fileSeq=2562",
+        "page": "2027 정시요강 PDF 6쪽 · 2026 결과",
+        "label": "공식 요강 속 2026 결과"
+      }
+    }
   },
   {
     "id": "sju-km-b",
@@ -423,7 +566,22 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "본교 산출 백분위입니다. 옆의 최초합격자·2025 결과 열과 구분했습니다. 모집군은 이 결과표에 없습니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 96,
+      "math": 99,
+      "inquiry1": 95,
+      "inquiry2": 95,
+      "english": 1,
+      "history": 1,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000119",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 사탐입니다. 대학 자체 산출 백분위 97.8과 이 3영역 단순평균은 다른 지표입니다. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "sju-km-a",
@@ -451,7 +609,16 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "본교 산출 백분위입니다. 옆의 최초합격자·2025 결과 열과 구분했습니다. 모집군은 이 결과표에 없습니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "percentilePending": {
+      "label": "원문 수치 확인 필요",
+      "reason": "어디가 70% 국어 백분위가 6으로 기재되어 있습니다. 96 등으로 임의 수정하지 않고 대학 확인 전까지 평균 계산을 보류합니다.",
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000119",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      }
+    }
   },
   {
     "id": "pnu-km",
@@ -460,20 +627,41 @@ export const admissionResults2026: AdmissionResult2026[] = [
     "university": "부산대학교",
     "program": "한의학 학·석사통합과정",
     "selection": "수능전형",
-    "gun": null,
-    "seats": null,
-    "seatsNote": "2026 전형별 모집군·인원 미확인.",
-    "competition": null,
-    "statistic": null,
-    "status": "unverified",
-    "metrics": [],
+    "gun": "가",
+    "seats": 5,
+    "seatsNote": "2026 어디가 최종 모집인원: 최초 5명 + 이월 0명.",
+    "competition": 10.6,
+    "statistic": "registered-70",
+    "status": "published",
+    "metrics": [
+      {
+        "label": "대학 환산점수",
+        "value": 743.5,
+        "unit": "점"
+      }
+    ],
     "source": {
       "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000014",
-      "page": "평가기준 및 입시결과 · 2026 정시 결과 확인 필요",
-      "label": "공식 어디가 · 결과 확인 경로"
+      "page": "2026 정시 수능전형 · 학석사통합과정(한의학과) · 70% 열",
+      "label": "어디가 · 대학 공개 과목 성적"
     },
-    "note": "현재 확보한 공식 자료에서 같은 전형의 2026 정시 입결을 검증하지 못했습니다. 미공개라고 단정하거나 다른 학년도 점수로 대체하지 않습니다.",
-    "checkedAt": "2026-09-21"
+    "note": "2026 정시 일반 수능전형의 결과입니다. 지역인재·저소득층 전형과 구분했습니다.",
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 97,
+      "math": 100,
+      "inquiry1": 96,
+      "inquiry2": 89,
+      "english": 2,
+      "history": 4,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000014",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 과탐입니다. 원문의 평균백분위 97은 정수로 공개되어 있으며, 이 화면은 과목별 백분위로 3영역 평균 96.50을 별도 계산합니다. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "wku-dent-human",
@@ -529,7 +717,22 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "2026 등록자는 과탐 95%, 사탐+과탐 5%로 공개됐습니다. 사탐 2과목 등록 비율은 0%입니다. 백분위는 자연계열 반영비율(국어 25%·수학 40%·탐구 35%) 적용 지표입니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 97,
+      "math": 100,
+      "inquiry1": 99,
+      "inquiry2": 95,
+      "english": 2,
+      "history": 1,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000066",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 과탐입니다. 좌측 반영비율 적용 백분위와 우측 3영역 단순평균은 산출 방식이 다릅니다. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "yonsei-dent",
@@ -600,7 +803,22 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 100,
+      "math": 94,
+      "inquiry1": 93,
+      "inquiry2": 100,
+      "english": 2,
+      "history": 1,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000159",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 과탐입니다. 공식 표의 평균과 여기의 탐구를 한 영역으로 묶은 3영역 평균은 산식이 다를 수 있으므로 각각 구분해 보세요. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "korea-med",
@@ -671,7 +889,22 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "2026 등록자의 탐구 선택은 과탐 100%로 공개됐습니다. 사탐 지원 허용만으로 유리한 전형이라고 판단하지 않습니다. 백분위는 자연계열 반영비율(국어 25%·수학 40%·탐구 35%) 적용 지표입니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 98,
+      "math": 100,
+      "inquiry1": 99,
+      "inquiry2": 95,
+      "english": 2,
+      "history": 1,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000066",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 과탐입니다. 좌측 반영비율 적용 백분위와 우측 3영역 단순평균은 산출 방식이 다릅니다. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "cau-med",
@@ -781,7 +1014,22 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "666.5점은 수능 95% 반영값으로 면접 총점이 아닙니다. 단순평균 정의는 2027 정시요강 PDF 43쪽에 있습니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 100,
+      "math": 100,
+      "inquiry1": 97,
+      "inquiry2": 98,
+      "english": 2,
+      "history": 1,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000048",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 과탐입니다. 공식 자료집의 백분위 99.2와 과목별 자료로 계산한 99.17은 표시 자릿수와 산출 근거를 구분해 제공합니다. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "yonsei-med",
@@ -923,7 +1171,16 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "공식 엑셀의 백분위 70% 열. 영어 환산 및 당시 반영비율을 포함하는 지표로 국수탐 단순평균과 다릅니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "percentilePending": {
+      "label": "과목별 자료 없음",
+      "reason": "입학처 엑셀은 영어 환산·반영비율이 포함된 지표만 공개합니다. 어디가 과목별 표도 추가 안내자료를 참조하도록 되어 있어 국수탐 단순평균을 계산할 수 없습니다.",
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000063",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      }
+    }
   },
   {
     "id": "wku-med",
@@ -956,7 +1213,22 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-70",
+      "korean": 99,
+      "math": 99,
+      "inquiry1": 98,
+      "inquiry2": 92,
+      "english": 2,
+      "history": 1,
+      "source": {
+        "url": "https://www.adiga.kr/ucp/uvt/uni/univDetailSelection.do?menuId=PCUVTINF2000&searchSyr=2027&unvCd=0000159",
+        "page": "2026학년도 정시 전형 결과 · 일반전형 70% 과목별 백분위",
+        "label": "어디가 · 대학 공개 과목 성적"
+      },
+      "note": "탐구1·2는 과탐입니다. 공식 표의 평균과 여기의 탐구를 한 영역으로 묶은 3영역 평균은 산식이 다를 수 있으므로 각각 구분해 보세요. 공개 70% 위치 성적으로 계산한 참고값이며, 전체 등록자 평균·과목별 최소 요구점수·대학의 공식 국수탐 합격컷이 아닙니다."
+    }
   },
   {
     "id": "ajou-med",
