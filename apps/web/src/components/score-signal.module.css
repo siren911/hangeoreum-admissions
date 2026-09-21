@@ -37,43 +37,56 @@
 .scoreRow strong { display: block; color: #b2f4df; font-size: 46px; font-weight: 750; line-height: 1.4; letter-spacing: -.06em; font-variant-numeric: tabular-nums; }
 .scoreRow strong small { display: inline; font-size: 15px; margin-left: 4px; color: #b2f4df; letter-spacing: -.03em; }
 .scoreRow small { display: block; font-size: 10px; color: #94a5b8; }
-.counts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-.counts > div { display: flex; justify-content: space-between; align-items: center; gap: 5px; background: #ffffff07; border: 1px solid #ffffff15; border-radius: 10px; padding: 10px 14px; }
-.counts span { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #c4cedb; }
-.counts b { font-size: 24px; letter-spacing: -.05em; line-height: 1.2; }
-.counts b small { font-size: 11px; margin-left: 4px; color: #a8b0c1; font-weight: 400; }
-.counts [data-tone=red] b { color: #ff91a4; }
-.counts [data-tone=yellow] b { color: #f8d580; }
-.counts [data-tone=green] b { color: #a5ebcd; }
+.counts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.counts > div { display: flex; justify-content: space-between; align-items: center; gap: 12px; border: 2px solid currentColor; border-radius: 16px; padding: 20px; min-width: 0; }
+.counts span { display: flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 800; color: inherit; line-height: 1.4; }
+.counts i { width: 24px; height: 24px; box-shadow: 0 0 0 5px #ffffff90; }
+.counts b { font-size: 48px; letter-spacing: -.04em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.counts b small { font-size: 16px; margin-left: 5px; font-weight: 600; }
+.counts [data-tone=red] { color: #9f1832; background: #ffe8ed; }
+.counts [data-tone=yellow] { color: #715000; background: #fff0b8; }
+.counts [data-tone=green] { color: #075d3d; background: #dcf8e9; }
+.counts [data-tone=gray] { color: #495369; background: #e9edf3; }
 .summaryFooter { display: flex; align-items: center; gap: 18px; justify-content: space-between; margin-top: 18px; }
 .summaryFooter p { font-size: 11px; line-height: 1.8; color: #b2bfd0; }
 .summaryFooter p b { color: #e3e9f2; font-weight: 500; }
 .summaryFooter button { background: #f9fbff; color: #232a3a; border-radius: 30px; padding: 10px 17px; display: inline-flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; flex-shrink: 0; }
-.legend { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 18px; margin-top: 17px; font-size: 11px; color: #4a5262; }
-.legend > span { display: flex; gap: 5px; align-items: center; }
-.legend small { font-size: 10px; color: #777889; }
+.legend { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; margin-top: 22px; font-size: 18px; font-weight: 750; color: #343d50; }
+.legend > span { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; }
+.legend i { width: 18px; height: 18px; }
+.legend small { font-size: 12px; font-weight: 500; color: #626679; }
 .legend > a { margin-left: auto; font-size: 11px; color: #735971; display: inline-flex; align-items: center; gap: 4px; }
-.badge { display: inline-flex; align-items: center; justify-content: center; gap: 5px; padding: 4px 9px; border-radius: 6px; font-size: 11px; font-weight: 700; white-space: nowrap; line-height: 1.6; }
-.badge i { width: 6px; height: 6px; background: currentColor; border-radius: 50%; }
+.badge { display: inline-flex; align-items: center; justify-content: center; gap: 14px; min-height: 66px; max-width: 100%; padding: 12px 20px; border: 2px solid transparent; border-radius: 14px; font-size: 26px; font-weight: 850; letter-spacing: -.035em; white-space: nowrap; line-height: 1.35; box-shadow: 0 3px 8px #17203312; }
+.badge i { width: 22px; height: 22px; flex-shrink: 0; background: currentColor; border-radius: 50%; box-shadow: 0 0 0 5px #ffffff28; }
+.badge.red { color: #fff; background: #b91c36; border-color: #a11930; }
+.badge.red i { background: #ffb5c1; }
+.badge.yellow { color: #4d3500; background: #ffd34d; border-color: #d59b13; }
+.badge.yellow i { background: #805b00; box-shadow: 0 0 0 5px #fff4; }
+.badge.green { color: #fff; background: #087a4c; border-color: #07633e; }
+.badge.green i { background: #91f4c0; }
+.badge.gray { color: #475569; background: #e8edf3; border-color: #bac5d2; box-shadow: none; }
+.badge.gray i { background: #64748b; }
 .red { color: #b32643; background: #ffedf0; }
 .yellow { color: #805d00; background: #fff4cc; }
 .green { color: #096849; background: #dff7ec; }
 .gray { color: #666879; background: #eeeef4; }
-.line { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; margin-top: 9px; }
-.line > span:last-child { font-size: 10px; color: #697084; }
+.line { display: grid; gap: 9px; margin-top: 14px; width: 100%; min-width: 0; }
+.line > span:last-child { font-size: 14px; color: #525e72; line-height: 1.65; font-weight: 600; }
 .detail { color: #485365; font-size: 12px; line-height: 1.8; padding: 15px 0; }
-.detailTitle { display: flex; gap: 12px; align-items: center; justify-content: space-between; }
-.detailTitle strong { color: #303747; font-size: 13px; }
-.detail > p { margin: 9px 0; }
+.detailTitle { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+.detailTitle strong { color: #303747; font-size: 15px; }
+.detailTitle .badge { min-height: 88px; font-size: 34px; }
+.detailTitle .badge i { width: 28px; height: 28px; }
+.detail > p { margin: 13px 0; font-size: 14px; }
 .outlook { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 10px; background: #f5f4f9; border: 1px solid #eeebf3; border-radius: 8px; padding: 9px 11px; margin-top: 12px; }
 .outlook > span { color: #71667e; font-size: 10px; }
 .outlook b { color: #4b465e; font-size: 14px; font-variant-numeric: tabular-nums; }
 .outlook small { font-size: 9px; margin-left: 5px; font-weight: 400; }
 .detail .metricNote { color: #76667b; font-size: 10px; }
-.ranges { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin: 12px 0 7px; }
-.ranges > div { border-radius: 8px; padding: 10px; }
-.ranges span { font-size: 11px; display: block; margin-bottom: 4px; }
-.ranges b { display: block; font-size: 13px; line-height: 1.6; font-variant-numeric: tabular-nums; }
+.ranges { display: grid; grid-template-columns: 1fr; gap: 9px; margin: 16px 0 10px; }
+.ranges > div { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 14px; border: 1px solid currentColor; border-radius: 11px; padding: 13px 16px; }
+.ranges span { font-size: 20px; font-weight: 800; display: block; }
+.ranges b { display: block; font-size: 19px; line-height: 1.55; font-variant-numeric: tabular-nums; text-align: right; }
 .detail > small { font-size: 10px; color: #73788a; }
 .method { border-top: 1px solid #e9e7ef; margin-top: 13px; padding-top: 4px; }
 .method summary { cursor: pointer; display: flex; justify-content: space-between; gap: 8px; align-items: center; list-style: none; padding: 9px 0; color: #55435c; font-size: 11px; font-weight: 600; }
@@ -118,7 +131,7 @@
   .scoreRow strong { font-size: 36px; }
   .scoreRow span { font-size: 11px; }
   .counts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .counts > div { padding: 10px 12px; }
+  .counts > div { padding: 17px; }
   .summaryFooter { flex-direction: column; align-items: stretch; gap: 12px; }
   .summaryFooter button { justify-content: center; }
   .summaryFooter p { font-size: 10px; }
@@ -126,6 +139,20 @@
   .legend > a { width: 100%; margin-top: 3px; }
   .methodGrid { grid-template-columns: 1fr; }
   .methodHeading p { font-size: 12px; }
+}
+
+@media(max-width: 480px) {
+  .counts { gap: 10px; }
+  .counts > div { flex-direction: column; align-items: flex-start; gap: 14px; padding: 15px 12px; }
+  .counts span { font-size: 19px; gap: 8px; white-space: nowrap; }
+  .counts i { width: 18px; height: 18px; box-shadow: 0 0 0 3px #ffffff90; }
+  .counts b { font-size: 42px; }
+  .badge { font-size: 25px; padding: 13px 17px; }
+  .detailTitle .badge { font-size: 30px; min-height: 82px; }
+  .ranges > div { padding: 12px; }
+  .ranges span { font-size: 18px; }
+  .ranges b { font-size: 17px; }
+  .legend > span { width: 100%; }
 }
 
 .scoreRow .gradeHint{font-size:10px;color:#d1c6df;line-height:1.65;margin-top:7px}
