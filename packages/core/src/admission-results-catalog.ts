@@ -235,7 +235,28 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "label": "공식 2026 입시결과"
     },
     "note": "국어 95, 수학 97.71, 탐구 97.29/96.43, 영어 1은 등록자 평균입니다. 70%컷 성적 구성과 구분하세요. 모집군은 이 결과표에 없습니다.",
-    "checkedAt": "2026-09-21"
+    "checkedAt": "2026-09-21",
+    "profile": {
+      "statistic": "registered-mean",
+      "korean": 95,
+      "math": 97.71,
+      "inquiry1": 97.29,
+      "inquiry2": 96.43,
+      "english": 1,
+      "history": null,
+      "grades": {
+        "korean": 1.57,
+        "math": 1,
+        "inquiry1": 1.14,
+        "inquiry2": 1
+      },
+      "source": {
+        "url": "https://enter.woosuk.ac.kr/main/filedown.php?menu=42&no=2600#page=61",
+        "page": "PDF 61쪽",
+        "label": "과목별 백분위·등급 공식표"
+      },
+      "note": "평균 등급은 등록자들의 등급을 평균 낸 값이며, 평균 백분위를 한 사람의 등급으로 바꾼 값이 아닙니다. 탐구1·2의 실제 선택과목과 한국사 등급은 이 표에 공개되어 있지 않습니다. 환산평균 404.26점과 평균 백분위는 최저 합격점이 아닙니다."
+    }
   },
   {
     "id": "wku-km-human",
@@ -544,7 +565,8 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "inquiry2": 98,
       "english": 2,
       "history": 2,
-      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다."
+      "statistic": "registered-70",
+      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다. 이 성적으로 계산한 평균은 등록자 전체의 평균이나 대학이 발표한 국수탐 백분위 70%컷이 아닙니다."
     }
   },
   {
@@ -614,7 +636,8 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "inquiry2": 98,
       "english": 1,
       "history": 1,
-      "note": "탐구1은 사탐 99, 탐구2는 과탐 98입니다. 재현의 사탐 2과목 조합과 다릅니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다."
+      "statistic": "registered-70",
+      "note": "탐구1은 사탐 99, 탐구2는 과탐 98입니다. 재현의 사탐 2과목 조합과 다릅니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다. 이 성적으로 계산한 평균은 등록자 전체의 평균이나 대학이 발표한 국수탐 백분위 70%컷이 아닙니다."
     }
   },
   {
@@ -684,7 +707,8 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "inquiry2": 97,
       "english": 2,
       "history": 1,
-      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다."
+      "statistic": "registered-70",
+      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다. 이 성적으로 계산한 평균은 등록자 전체의 평균이나 대학이 발표한 국수탐 백분위 70%컷이 아닙니다."
     }
   },
   {
@@ -721,7 +745,8 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "inquiry2": 99,
       "english": 2,
       "history": 1,
-      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다."
+      "statistic": "registered-70",
+      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다. 이 성적으로 계산한 평균은 등록자 전체의 평균이나 대학이 발표한 국수탐 백분위 70%컷이 아닙니다."
     },
     "priority": true
   },
@@ -792,7 +817,8 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "inquiry2": 99,
       "english": 1,
       "history": 1,
-      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다."
+      "statistic": "registered-70",
+      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다. 이 성적으로 계산한 평균은 등록자 전체의 평균이나 대학이 발표한 국수탐 백분위 70%컷이 아닙니다."
     }
   },
   {
@@ -829,7 +855,8 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "inquiry2": 91,
       "english": 1,
       "history": 1,
-      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다."
+      "statistic": "registered-70",
+      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다. 이 성적으로 계산한 평균은 등록자 전체의 평균이나 대학이 발표한 국수탐 백분위 70%컷이 아닙니다."
     }
   },
   {
@@ -866,7 +893,8 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "inquiry2": 95,
       "english": 1,
       "history": 2,
-      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다."
+      "statistic": "registered-70",
+      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다. 이 성적으로 계산한 평균은 등록자 전체의 평균이나 대학이 발표한 국수탐 백분위 70%컷이 아닙니다."
     }
   },
   {
@@ -964,7 +992,8 @@ export const admissionResults2026: AdmissionResult2026[] = [
       "inquiry2": 99,
       "english": 3,
       "history": 1,
-      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다."
+      "statistic": "registered-70",
+      "note": "탐구1·2는 과학탐구 성적입니다. 공개된 70% 위치의 성적 구성이며 과목별 최소 요구점수나 재현의 성적이 아닙니다. 이 성적으로 계산한 평균은 등록자 전체의 평균이나 대학이 발표한 국수탐 백분위 70%컷이 아닙니다."
     },
     "priority": true
   }

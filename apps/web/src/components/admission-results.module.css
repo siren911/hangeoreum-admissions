@@ -41,4 +41,25 @@
 .empty { padding: 45px 20px; text-align: center; color: #a292aa; }.empty h3 { font-size: 17px; margin-top: 12px; }.empty p { font-size: 12px; margin: 7px 0 18px; }
 @media(max-width: 950px) { .overview { padding: 25px; gap: 20px; }.overviewCopy h2 { font-size: 26px; }.coverage { padding: 20px; }.cardBody { gap: 15px; padding: 20px; grid-template-columns: 1.05fr .8fr 1.45fr; }.scoreBlock { padding-left: 18px; }.metrics { gap: 12px; }.metrics b { font-size: 24px; }.cardFooter { padding: 10px 20px; }.school h3 { font-size: 16px; }.categories button { padding: 16px; gap: 10px; } }
 @media(max-width: 700px) { .overview { grid-template-columns: 1fr; gap: 23px; padding: 24px; }.overviewCopy h2 br { display: none; }.overviewCopy h2 { font-size: 24px; }.coverageNumbers b { font-size: 32px; }.categories { gap: 7px; }.categories button { flex-direction: column; align-items: flex-start; padding: 13px 10px; gap: 8px; }.categories button > svg:last-child { display: none; }.categories b { font-size: 16px; }.categories small { font-size: 9px; }.categories button > svg { width: 20px; }.scope { font-size: 10px; }.readingGuide { padding: 15px; gap: 9px; }.readingGuide p { font-size: 11px; }.toolbar { gap: 12px; }.filters { width: 100%; }.search { flex: 1; min-width: 0; }.search input { width: 100%; }.filters select { max-width: 150px; font-size: 11px; padding: 9px 6px; }.listCaption { font-size: 9px; gap: 3px; }.cardBody { grid-template-columns: 1fr auto; gap: 16px; padding: 20px; }.school h3 { font-size: 17px; }.recruitment { text-align: right; }.recruitment strong { font-size: 14px; justify-content: flex-end; gap: 5px; }.scoreBlock { grid-column: 1 / -1; padding: 15px 0 0; border-left: 0; border-top: 1px solid #efebf5; }.metrics { gap: 25px; }.metrics b { font-size: 29px; }.cardFooter { padding: 10px 16px; flex-wrap: wrap; gap: 5px 10px; }.detail { flex-basis: 100%; order: 2; }.source { margin-left: auto; }.detail summary { font-size: 11px; }.detailBody dl > div { grid-template-columns: 80px 1fr; }.profileScores { grid-template-columns: repeat(3, 1fr); }.sectionTitle h2 { font-size: 19px; }.bottomNote { font-size: 10px; } }
+.scoreComparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 12px; align-items: start; }
+.scoreOrigin { display: block; font-size: 10px; font-weight: 600; color: #62566f; margin-bottom: 6px; }
+.scoreComparison .metrics { margin-top: 0; gap: 8px; }
+.derivedScore { padding: 10px 12px; border: 1px solid #d9e8e0; border-radius: 10px; background: #f0f7f3; min-width: 0; }
+.derivedScore .scoreOrigin { color: #537663; font-size: 9px; }
+.derivedLabel { display: block; color: #667d70; font-size: 10px; line-height: 1.6; }
+.derivedScore b { color: #376a50; font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
+.derivedScore small { color: #799486; font-size: 9px; margin-left: 3px; }
+.derivedScore p { font-size: 9px; line-height: 1.7; color: #758b7f; margin-top: 4px; }
+.noAverage { display: block; font-size: 15px; font-weight: 500; color: #8a8791; margin: 4px 0; }
+.subjectTable { width: 100%; max-width: 560px; table-layout: fixed; border-collapse: collapse; margin: 12px 0; font-size: 12px; font-variant-numeric: tabular-nums; }
+.subjectTable th, .subjectTable td { padding: 8px 10px; border-bottom: 1px solid #e9e3ef; text-align: right; }
+.subjectTable th:first-child { text-align: left; }
+.subjectTable thead { color: #766780; background: #f1ecf6; font-size: 11px; }
+.subjectTable tbody th { color: #766780; font-weight: 500; }
+.subjectTable td { color: #51445e; }
+.averageFormula { background: #edf5ef; border-radius: 9px; padding: 13px 15px; margin: 14px 0; overflow-wrap: anywhere; color: #587462; }
+.averageFormula > b { font-size: 11px; }.averageFormula p { font-size: 13px; margin: 5px 0; }.averageFormula strong { color: #38624b; }.averageFormula small { display: block; font-size: 10px; line-height: 1.7; }
+.profileSource { display: inline-flex; align-items: center; gap: 5px; margin-top: 9px; color: #7e5482; font-size: 11px; flex-wrap: wrap; }
+@media(min-width: 701px) { .cardBody { grid-template-columns: 1.1fr .7fr 2fr; } }
+@media(max-width: 700px) { .scoreComparison { gap: 12px; }.derivedScore b { font-size: 28px; }.subjectTable th, .subjectTable td { padding: 8px 6px; }.averageFormula { padding: 12px; } }
 @media print { .toolbar, .categories, .source { display: none; }.overview { padding: 15px; }.card { break-inside: avoid; }.cardBody { padding: 15px; } }

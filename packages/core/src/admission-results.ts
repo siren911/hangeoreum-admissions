@@ -1,8 +1,17 @@
 import { admissionResults2026 } from './admission-results-catalog';
+import Decimal from 'decimal.js';
 
 export type AdmissionCategory = 'korean-medicine' | 'dentistry' | 'medicine';
 export type ResultStatistic = 'registered-70' | 'registered-80' | 'registered-mean' | 'admitted-70';
 export type HistoricalMetric = { label: string; value: number; unit: string };
+export type HistoricalScoreProfile = {
+  statistic: 'registered-mean' | 'registered-70';
+  korean: number; math: number; inquiry1: number; inquiry2: number;
+  english: number; history: number | null;
+  grades?: { korean: number; math: number; inquiry1: number; inquiry2: number };
+  source?: { url: string; page: string; label: string };
+  note: string;
+};
 export type AdmissionResult2026 = {
   id: string;
   year: 2026;
@@ -18,7 +27,7 @@ export type AdmissionResult2026 = {
   source: { url: string; page: string; label: string };
   checkedAt: string;
   priority?: boolean;
-  profile?: { korean: number; math: number; inquiry1: number; inquiry2: number; english: number; history: number; note: string };
+  profile?: HistoricalScoreProfile;
 } & (
   | { status: 'published'; statistic: ResultStatistic; metrics: [HistoricalMetric, ...HistoricalMetric[]] }
   | { status: 'withheld' | 'unverified'; statistic: null; metrics: [] }
@@ -34,6 +43,21 @@ export const resultStatisticLabels: Record<ResultStatistic, string> = {
   'registered-mean': '최종등록자 평균',
   'admitted-70': '전체 합격자 70%',
 };
+
+// Use the published subject percentiles, never invert a university's converted score.
+export function admissionPercentileSummary(row: AdmissionResult2026) {
+  const p = row.profile;
+  if (row.status !== 'published' || !p ||
+    ![p.korean, p.math, p.inquiry1, p.inquiry2].every(value =>
+      typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 100)) return null;
+  const inquiry = new Decimal(p.inquiry1).plus(p.inquiry2).div(2);
+  const average = new Decimal(p.korean).plus(p.math).plus(inquiry).div(3);
+  return {
+    average: average.toDecimalPlaces(2, Decimal.ROUND_HALF_UP).toNumber(),
+    inquiryAverage: inquiry.toDecimalPlaces(2, Decimal.ROUND_HALF_UP).toNumber(),
+    basis: p.statistic,
+  };
+}
 export type ResultFilter = 'all' | ResultStatistic | 'withheld' | 'unverified';
 export function filterAdmissionResults(category: AdmissionCategory | 'all', query = '', statistic: ResultFilter = 'all') {
   const normalized = query.replace(/\s/g, '').toLocaleLowerCase('ko');

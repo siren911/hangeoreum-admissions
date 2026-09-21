@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { admissionResults2026, filterAdmissionResults, professionalOptions } from '../packages/core/src/index';
+import { admissionResults2026, admissionPercentileSummary, filterAdmissionResults, professionalOptions } from '../packages/core/src/index';
 
 const row = (id: string) => {
   const result = admissionResults2026.find(r => r.id === id);
@@ -84,5 +84,58 @@ describe('2026 historical admissions data', () => {
     expect(filterAdmissionResults('medicine', '원광', 'withheld')).toEqual([]);
     expect(filterAdmissionResults('all', 'NOT A UNIVERSITY')).toEqual([]);
     expect(filterAdmissionResults('korean-medicine', 'w i s e', 'registered-80')).toHaveLength(2);
+  });
+
+  it('keeps Woosuk official means and grades distinct from the computed three-area average', () => {
+    const wsu = row('wsu-km');
+    expect(wsu.metrics[0].value).toBe(404.26);
+    expect(wsu.profile).toMatchObject({
+      statistic: 'registered-mean', korean: 95, math: 97.71, inquiry1: 97.29, inquiry2: 96.43,
+      english: 1, history: null, grades: { korean: 1.57, math: 1, inquiry1: 1.14, inquiry2: 1 },
+    });
+    expect(wsu.profile?.source?.url).toContain('no=2600#page=61');
+    expect(admissionPercentileSummary(wsu)).toEqual({ average: 96.52, inquiryAverage: 96.86, basis: 'registered-mean' });
+    // Treating both inquiry subjects as separate areas would give 96.61, which is not this measure.
+    expect(admissionPercentileSummary(wsu)?.average).not.toBe(96.61);
+  });
+
+  it('labels a 70%-position profile as its own statistic, not a cohort mean', () => {
+    expect(admissionPercentileSummary(row('hanyang-med'))).toEqual({ average: 98, inquiryAverage: 95, basis: 'registered-70' });
+    expect(admissionPercentileSummary(row('ajou-med'))?.average).toBe(98.83);
+    expect(admissionResults2026.filter(r => admissionPercentileSummary(r))).toHaveLength(9);
+  });
+
+  it('does not infer percentiles from a converted score or a published weighted percentile alone', () => {
+    for (const id of ['gcu-km', 'khu-km-human', 'wku-km-natural', 'wku-dent-human', 'pnu-km']) {
+      expect(admissionPercentileSummary(row(id))).toBeNull();
+    }
+    const wsu = structuredClone(row('wsu-km'));
+    delete wsu.profile;
+    expect(admissionPercentileSummary(wsu)).toBeNull();
+  });
+
+  it('excludes English, history and university converted scores from the percentile calculation', () => {
+    const wsu = structuredClone(row('wsu-km'));
+    wsu.profile!.english = 9;
+    wsu.profile!.history = 9;
+    wsu.metrics[0].value = 1;
+    expect(admissionPercentileSummary(wsu)?.average).toBe(96.52);
+  });
+
+  it('requires all four valid percentiles and accepts zero without treating it as missing', () => {
+    for (const invalid of [NaN, Infinity, -1, 101, null as unknown as number]) {
+      const wsu = structuredClone(row('wsu-km'));
+      wsu.profile!.inquiry2 = invalid;
+      expect(admissionPercentileSummary(wsu)).toBeNull();
+    }
+    const wsu = structuredClone(row('wsu-km'));
+    Object.assign(wsu.profile!, { korean: 0, math: 0, inquiry1: 0, inquiry2: 0 });
+    expect(admissionPercentileSummary(wsu)?.average).toBe(0);
+  });
+
+  it('rounds the final decimal average half up', () => {
+    const wsu = structuredClone(row('wsu-km'));
+    Object.assign(wsu.profile!, { korean: 95, math: 97.03, inquiry1: 97, inquiry2: 97.01 });
+    expect(admissionPercentileSummary(wsu)?.average).toBe(96.35);
   });
 });

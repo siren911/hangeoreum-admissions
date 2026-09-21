@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { ArrowUpRight, BookOpen, ChartNoAxesColumnIncreasing, ChevronDown, CircleHelp, HeartPulse, Leaf, Search, Stethoscope } from 'lucide-react';
-import { admissionResults2026, admissionCategoryLabels, filterAdmissionResults, resultStatisticLabels, RESULTS_AS_OF, type AdmissionCategory, type AdmissionResult2026, type ResultFilter } from '@j/core';
+import { admissionResults2026, admissionCategoryLabels, admissionPercentileSummary, filterAdmissionResults, resultStatisticLabels, RESULTS_AS_OF, type AdmissionCategory, type AdmissionResult2026, type ResultFilter } from '@j/core';
 import styles from './admission-results.module.css';
 
 const categories = ['korean-medicine', 'dentistry', 'medicine'] as const;
@@ -51,7 +51,7 @@ export default function AdmissionResults() {
     <p className={styles.scope}>현재 워크스페이스의 검토 대학과 확인된 인문·자연 전형을 수록했습니다. 전국 모든 대학·전형의 전수 목록은 아닙니다. 지역인재·수시 입결은 포함하지 않습니다.</p>
 
     <div className={styles.readingGuide}>
-      <CircleHelp size={19}/><div><b>70%컷은 마지막 합격자의 점수가 아니에요.</b><p>등록자를 성적순으로 놓았을 때 약 70% 위치의 값입니다. 평균·80%컷·전체 합격자 통계는 서로 구분하며, 대학마다 환산 방식이 달라 총점 크기로 순위를 매기지 않습니다.</p></div>
+      <CircleHelp size={19}/><div><b>대학 공개 점수와 계산한 평균 백분위를 함께 보세요.</b><p>국수탐 평균 백분위 = (국어 + 수학 + 탐구 두 과목 평균) ÷ 3. 공개된 과목별 백분위로 계산하며, 영어·한국사·가산점은 포함하지 않습니다. 대학 환산점수를 백분위로 역산한 값이나 대학의 공식 합격컷이 아닙니다.</p><p>70%컷은 마지막 합격자의 점수가 아닙니다. 등록자 평균과 70% 위치의 성적은 서로 다른 통계이며, 대학마다 환산 방식도 다릅니다.</p></div>
     </div>
     <div className={styles.toolbar}>
       <div className={styles.sectionTitle}><h2>{category === 'all' ? '전체 계열' : admissionCategoryLabels[category]} 입결 <span>{rows.length}</span></h2><button aria-pressed={category === 'all'} onClick={() => chooseCategory('all')}>전체 계열 보기</button></div>
@@ -75,6 +75,9 @@ export default function AdmissionResults() {
 
 function ResultCard({row}: {row: AdmissionResult2026}) {
   const published = row.status === 'published';
+  const summary = admissionPercentileSummary(row);
+  const profile = row.profile;
+  const meanProfile = profile?.statistic === 'registered-mean';
   return <article className={styles.card} aria-label={`${row.university} ${row.program} 2026 입결`}>
     <div className={styles.cardBody}>
       <div className={styles.school}>
@@ -88,18 +91,30 @@ function ResultCard({row}: {row: AdmissionResult2026}) {
       </div>
       <div className={styles.scoreBlock}>
         <span className={`${styles.statistic} ${row.statistic === 'registered-mean' || row.statistic === 'admitted-70' ? styles.differentStatistic : ''} ${!published ? styles.pending : ''}`}>{published ? resultStatisticLabels[row.statistic] : row.status === 'withheld' ? '성적 비공개' : '입결 추가 확인 필요'}</span>
-        {published ? <div className={styles.metrics}>{row.metrics.map((metric,index) => <div key={index}><span>{metric.label}</span><div><b>{number(metric.value)}</b><small>{metric.unit}</small></div></div>)}</div> : <p className={styles.unavailable}>{row.status === 'withheld' ? '소수 모집으로 대학이 점수를 공개하지 않았습니다.' : '검증된 2026 점수를 아직 확보하지 못했습니다.'}</p>}
+        {published ? <div className={styles.scoreComparison}>
+          <div><span className={styles.scoreOrigin}>대학 공개 점수</span><div className={styles.metrics}>{row.metrics.map((metric,index) => <div key={index}><span>{metric.label}</span><div><b>{number(metric.value)}</b><small>{metric.unit}</small></div></div>)}</div></div>
+          <div className={styles.derivedScore}><span className={styles.scoreOrigin}>과목 성적으로 계산</span><span className={styles.derivedLabel}>국수탐 평균 백분위</span>{summary ? <><div><b>{summary.average.toFixed(2)}</b><small>/100</small></div><p>{summary.basis === 'registered-mean' ? '등록자 평균 성적 기준' : '공개 70% 위치 성적 기준'}</p></> : <><strong className={styles.noAverage}>계산 보류</strong><p>과목별 백분위 미확인</p></>}</div>
+        </div> : <p className={styles.unavailable}>{row.status === 'withheld' ? '소수 모집으로 대학이 점수를 공개하지 않았습니다.' : '검증된 2026 점수를 아직 확보하지 못했습니다.'}</p>}
       </div>
     </div>
     <div className={styles.cardFooter}>
-      <details className={styles.detail}>
-        <summary>해석·성적 구성·자료 기준 <ChevronDown size={15}/></summary>
+      <details className={styles.detail} open={meanProfile || undefined}>
+        <summary>과목별 백분위·등급·계산식 <ChevronDown size={15}/></summary>
         <div className={styles.detailBody}>
           {row.note && <p>{row.note}</p>}
-          {row.profile && <div className={styles.profile}>
-            <b>공개된 70% 위치의 과목 성적</b>
-            <div className={styles.profileScores}>{([['국어',row.profile.korean,'백분위'],['수학',row.profile.math,'백분위'],['탐구1',row.profile.inquiry1,'백분위'],['탐구2',row.profile.inquiry2,'백분위'],['영어',row.profile.english,'등급'],['한국사',row.profile.history,'등급']] as const).map(([label,value,unit]) => <span key={label}>{label}<strong>{value}</strong><small>{unit}</small></span>)}</div>
-            <p>{row.profile.note}</p>
+          {profile && <div className={styles.profile}>
+            <b>{meanProfile ? '대학이 공개한 최종등록자 평균 성적' : '대학이 공개한 70% 위치의 과목 성적'}</b>
+            <table className={styles.subjectTable} aria-label={`${row.university} 공개 과목별 백분위와 등급`}>
+              <thead><tr><th scope="col">과목</th><th scope="col">{meanProfile ? '평균 백분위' : '공개 백분위'}</th><th scope="col">{meanProfile ? '평균 등급' : '공개 등급'}</th></tr></thead>
+              <tbody>{([
+                ['국어',profile.korean,profile.grades?.korean],['수학',profile.math,profile.grades?.math],
+                ['탐구1',profile.inquiry1,profile.grades?.inquiry1],['탐구2',profile.inquiry2,profile.grades?.inquiry2],
+                ['영어',null,profile.english],['한국사',null,profile.history],
+              ] as const).map(([label,percentile,grade]) => <tr key={label}><th scope="row">{label}</th><td>{percentile === null ? '—' : number(percentile)}</td><td>{grade == null ? '미확인' : `${meanProfile ? grade.toFixed(2) : number(grade)}등급`}</td></tr>)}</tbody>
+            </table>
+            {summary && <div className={styles.averageFormula}><b>국수탐 평균 백분위 계산</b><p>({number(profile.korean)} + {number(profile.math)} + ({number(profile.inquiry1)} + {number(profile.inquiry2)}) ÷ 2) ÷ 3 = <strong>{summary.average.toFixed(2)}</strong></p><small>탐구를 한 영역으로 묶은 3영역 단순평균 · 최종 값만 소수 둘째 자리 반올림 · 대학 반영비율·영어·한국사·가산점 제외</small></div>}
+            <p>{profile.note}</p>
+            {profile.source && <a className={styles.profileSource} href={profile.source.url} target="_blank" rel="noreferrer">{profile.source.label} · {profile.source.page} <ArrowUpRight size={13}/></a>}
           </div>}
           <dl><div><dt>모집인원 기준</dt><dd>{row.seatsNote}</dd></div><div><dt>공식 자료 위치</dt><dd>{row.source.page}</dd></div><div><dt>대조·정리일</dt><dd>{row.checkedAt}</dd></div></dl>
         </div>
